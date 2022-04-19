@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function header(props) {
     return (
@@ -15,7 +16,7 @@ function header(props) {
                             <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
                             <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                             <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
-                        </div>
+             </div>
                     </div>
                 </div>
                 <header id="header" className="fixed-top">
@@ -28,11 +29,21 @@ function header(props) {
                         </div>
                         <nav id="navbar" className="navbar order-last order-lg-0">
                             <ul>
-                                <li><a className="nav-link scrollto active" href="index.html">Home</a></li>
-                                <li><a className="nav-link scrollto" href="./pages/departments.html">Departments</a></li>
-                                <li><a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a></li>
-                                <li><a className="nav-link scrollto " href="./pages/about.html">About</a></li>
-                                <li><a className="nav-link scrollto" href="./pages/contact.html">Contact</a></li>
+                                <li>
+                                    <NavLink to={"/"} className="nav-link scrollto active" Home></NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/Department"} className="nav-link scrollto">Department</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/Doctor"} className="nav-link scrollto">Doctor</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/About"} className="nav-link scrollto">About</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/Conatact"} className="nav-link scrollto">Contact</NavLink>
+                                </li> 
                             </ul>
                             <i className="bi bi-list mobile-nav-toggle" />
                         </nav>
