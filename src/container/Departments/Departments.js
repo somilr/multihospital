@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Department(props) {
+function Departments(props) {
     return (
         <section id="departments" className="departments">
             <div className="container">
@@ -114,4 +114,4 @@ function Department(props) {
     );
 }
 
-export default Department;
+export default Departments;

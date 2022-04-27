@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ppointment(props) {
+function Appoinment(props) {
     return (
         <section id="appointment" className="appointment">
             <div className="container">
@@ -57,4 +57,4 @@ function ppointment(props) {
     );
 }
 
-export default ppointment;
+export default Appoinment;

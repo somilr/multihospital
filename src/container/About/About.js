@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pages(props) {
+function About(props) {
     return (
         <section id="about" className="about">
             <div className="container">
@@ -21,4 +21,4 @@ function Pages(props) {
     );
 }
 
-export default Pages;
+export default About;

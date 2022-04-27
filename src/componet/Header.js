@@ -30,19 +30,19 @@ function header(props) {
                         <nav id="navbar" className="navbar order-last order-lg-0">
                             <ul>
                                 <li>
-                                    <NavLink to={"/"} className="nav-link scrollto active" Home></NavLink>
+                                    <NavLink  to= {"/"} className="nav-link scrollto active">Home</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"/Department"} className="nav-link scrollto">Department</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/Doctor"} className="nav-link scrollto">Doctor</NavLink>
+                                    <NavLink to={"/doctor"} className="nav-link scrollto">Doctor</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"/About"} className="nav-link scrollto">About</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/Conatact"} className="nav-link scrollto">Contact</NavLink>
+                                    <NavLink to={"/Contact"} className="nav-link scrollto">Contact</NavLink>
                                 </li> 
                             </ul>
                             <i className="bi bi-list mobile-nav-toggle" />

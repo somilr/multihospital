@@ -1,6 +1,6 @@
 import React from 'react';
 
-function home(props) {
+function Home(props) {
     return (
         <div>
             <section id="hero" className="d-flex align-items-center">
@@ -267,4 +267,4 @@ function home(props) {
     );
 }
 
-export default home;
+export default Home;
