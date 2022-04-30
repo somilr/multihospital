@@ -30,10 +30,10 @@ function header(props) {
                         <nav id="navbar" className="navbar order-last order-lg-0">
                             <ul>
                                 <li>
-                                    <NavLink  to= {"/"} className="nav-link scrollto active">Home</NavLink>
+                                    <NavLink exact to = {"/"} className="nav-link scrollto ">Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/Department"} className="nav-link scrollto">Department</NavLink>
+                                    <NavLink to={"/Departments"} className="nav-link scrollto">departments</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"/doctor"} className="nav-link scrollto">Doctor</NavLink>

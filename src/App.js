@@ -5,6 +5,7 @@ import Departments from "./container/Departments/Departments";
 import About from "./container/About/About";
 import Doctor from "./container/Doctor/Doctor";
 import Contact from "./container/Contact/Contact";
+import Appoinment from "./container/Appoinment/Appoinment";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
 
@@ -14,11 +15,12 @@ function App() {
       <Header />
       <Switch>
         <Route exact path={"/"} component={Home} />
-        <Route exact path={"/Departments"} component={Departments} />
-        <Route exact path={"/doctor"} component={Doctor} />
-        <Route exact path={"/About"} component={About} />
-        <Route exact path={"/Contact"} component={Contact} />
-        <Route exact path={"/Auth"} component={Auth} />
+        <Route  path={"/Departments"} component={Departments} />
+        <Route  path={"/doctor"} component={Doctor} />
+        <Route  path={"/About"} component={About} />
+        <Route  path={"/Contact"} component={Contact} />
+        <Route  path={"/Appoinment"} component={Appoinment} />
+        <Route  path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />
     </>

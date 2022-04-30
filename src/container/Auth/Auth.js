@@ -1,12 +1,12 @@
-import React, { usestate } from 'react';
+import React, { useState } from 'react';
 
 function Auth() {
-    // const [reset, SetReset] = usestate (false)
-    const [usertype, setusertype] = usestate('Login');
+     const [reset, SetReset] = useState (false)
+    const [usertype, setusertype] = useState('Login');
     const heandleLogin=() => {
         
     }
-    const heandleLogin =() =>{
+    const heandleSignup =() =>{
         
     }
     return (
@@ -45,31 +45,29 @@ function Auth() {
 
                         }
                         {
-                            usertype === 'Login' ? <div className="text-center" ><button type="submit" onClick={() => heandleLogin()}>>Login </button></div> :
-                                <div className="text-center" onClick={() => heandleLogin()}><button type="submit">Signin</button></div>
+                            usertype === 'Login' ? <div className="text-center" ><button className='mb-2' type="submit" onClick={() => heandleLogin()}>Login </button></div> :
+                                <div className="text-center" onClick={() => heandleSignup()}><button type="submit">Signup</button></div>
                         }
                     </div>
                     {
                         usertype === 'Login' ?
                             <div className='text-center'>
-                                <span>creat a new account</span>
-                                <button className='btn-danger' onClick={() => heandleLogin()}>
-                                    <span>Login</span>
+                                <a href='#' className='text-dark'> creat a new account</a>
+                                <button className='ms-3' type="submit"  onClick={() => heandleSignup()}>
+                                    <span>Signup</span>
                                 </button>
                             </div> :
                             <div className='text-center'>
                                 <span>already account</span>
+                                <button type="submit" className='ms-3' onClick={() => heandleLogin()}>
+                                    <span>Login</span>
+                                </button>
                             </div>
 
                     }
 
 
-                    <div className="mb-3">
-                        <div className="loading">Loading</div>
-                        <div className="error-message" />
-                        <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                    </div>
-
+                   
                 </div>
             </div>
         </section>
