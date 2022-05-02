@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Departments from "./container/Departments/Departments";
 import About from "./container/About/About";
 import Doctor from "./container/Doctor/Doctor";
+import Appoinment from "./container/Appoinment/Appoinment"
 import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
@@ -18,6 +19,7 @@ function App() {
         <Route exact path={"/doctor"} component={Doctor} />
         <Route exact path={"/About"} component={About} />
         <Route exact path={"/Contact"} component={Contact} />
+        <Route exact path={"/Appoinment"} component={Appoinment }/>
         <Route exact path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />
