@@ -8,6 +8,7 @@ import Appoinment from "./container/Appoinment/Appoinment"
 import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
+import Medicine from "./container/Medicine/Medicine";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path={"/Departments"} component={Departments} />
         <Route exact path={"/doctor"} component={Doctor} />
         <Route exact path={"/About"} component={About} />
+        <Route exact path={"/Medicine"} component={Medicine} />
         <Route exact path={"/Contact"} component={Contact} />
         <Route exact path={"/Appoinment"} component={Appoinment }/>
         <Route exact path={"/Auth"} component={Auth} />
