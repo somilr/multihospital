@@ -14,6 +14,7 @@ return ( data.map(( d, i) => {
                     <CardTitle>{d.name}</CardTitle>
                     <CardSubtitle>{d.price}</CardSubtitle>
                     <CardText>{d.expiry}</CardText>
+                    <CardText>{d.salary}</CardText>
                     <Button>Order</Button>
                 </CardBody>
             </Card>
