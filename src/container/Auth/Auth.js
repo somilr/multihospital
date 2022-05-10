@@ -11,9 +11,12 @@ function Auth(props) {
     }
     const handleSignup = (values) => {
 
-        let data = JSON.parse(localStorage.getItem("user"));
+        let data = JSON.parse(localStorage.getItem('user'));
+        data = data ? data.split(',') : [];
         console.log(data);
-        // alert(JSON.stringify(values, null, 2));
+        data.push('values');
+        data.setItem('user', data.toString());
+        alert(JSON.stringify(values, null, 2));
         localStorage.setItem("user", JSON.stringify([values]))
 
     }
@@ -30,6 +33,9 @@ function Auth(props) {
         email: yup.string().email('please enter email').required('please enter your email'),
         password: yup.string().required('please enter your password'),
     }
+    let reset = {
+        email: yup.string().email('please enter email').required('please enter your email')
+    }
     let schema, initval
 
     if (usertype === 'Login') {
@@ -44,15 +50,17 @@ function Auth(props) {
     } else if (usertype === 'singup') {
         schema = yup.object().shape(Signup)
         initval = {
-
             name: '',
             email: '',
             password: ''
+        }
 
-
+    } else if (usertype === 'Login') {
+        schema = yup.object().shape(password)
+        initval = {
+            email: '',
         }
     }
-
     const formik = useFormik({
         initialValues: initval,
         validationSchema: schema,
@@ -120,7 +128,6 @@ function Auth(props) {
                                         placeholder='your email'
                                         name="email"
                                         id="email"
-
                                         onChange={formik.handleChange}
                                         value={formik.values.email}
                                         onBlur={formik.handleBlur}
@@ -128,34 +135,32 @@ function Auth(props) {
                                     {
                                         formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : null
                                     }
-
-
-
                                     <div className="validate" />
                                 </div>
 
-                            {
-                                password ?
-                                null :
-                             
-                                <div className="col-md-7 form-group mt-3 mt-md-0">
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    name="password"
-                                    id="phone"
-                                    placeholder="password"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.password}
-                                    onBlur={formik.handleBlur} />
-                                <div className="validate" />
                                 {
-                                    formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null
+                                    password === true ?
+                                        null :
+
+                                        <div className="col-md-7 form-group mt-3 mt-md-0">
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                name="password"
+                                                id="phone"
+                                                placeholder="password"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.password}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                            {
+                                                formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null
+                                            }
+                                            <div className="validate" />
+
+
+                                        </div>
                                 }
-
-
-                            </div> 
-                            }
                                 {
                                     password ?
                                         <div className="text-center">
@@ -167,7 +172,7 @@ function Auth(props) {
                                                 <button type='submit' onClick={() => handleLogin()}>Login</button><br></br>
                                             </div> :
                                             <div className="text-center">
-                                                <button onClick={() => handleSignup()} >signup</button>
+                                                <button type='submit' onClick={() => handleSignup()} >signup</button>
                                             </div>
                                 }
                                 {
@@ -175,7 +180,7 @@ function Auth(props) {
                                     password === true ?
                                         <div className='text-center mt-5'>
                                             <span>already have an account ?</span>
-                                            <a onClick={() => setpassword(false)}>Login</a>
+                                            <a onClick={() => setpassword('Login')}>Login</a>
                                         </div> :
                                         usertype === 'Login' ?
                                             <div className='text-center mt-5'>
@@ -189,7 +194,7 @@ function Auth(props) {
                                                 <a onClick={() => { setuserType('Login') }} >Login</a>
                                             </div>
                                 }
-                             </div>   
+                            </div>
                         </Form>
                     </Formik>
                 </div>
