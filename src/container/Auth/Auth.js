@@ -1,206 +1,225 @@
+
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 
 function Auth(props) {
+    const [userType, setUserType] = useState('Login')
+    const [reset, setReset] = useState(false)
 
-    const [usertype, setuserType] = useState('Login');
-    const [password, setpassword] = useState(false)
-    const handleLogin = (values) => {
-        alert(JSON.stringify(values, null, 2));
-    }
-    const handleSignup = (values) => {
+    const handletLogin = (values) => {
+        // alert(JSON.stringify(values, null, 2));
+        let data = JSON.parse(localStorage.getItem("users"))
 
-        let data = JSON.parse(localStorage.getItem('user'));
-        data = data ? data.split(',') : [];
-        console.log(data);
-        data.push('values');
-        data.setItem('user', data.toString());
-        alert(JSON.stringify(values, null, 2));
-        localStorage.setItem("user", JSON.stringify([values]))
-
-    }
-    const passwordchng = () => {
-
-    }
-    let login = {
-
-        email: yup.string().email('please enter valid email').required('please enter your email'),
-        password: yup.string().required('please enter your password'),
-    }
-    let Signup = {
-        name: yup.string().required('please enter name'),
-        email: yup.string().email('please enter email').required('please enter your email'),
-        password: yup.string().required('please enter your password'),
-    }
-    let reset = {
-        email: yup.string().email('please enter email').required('please enter your email')
-    }
-    let schema, initval
-
-    if (usertype === 'Login') {
-        schema = yup.object().shape(login)
-        initval = {
-
-            email: '',
-            password: ''
-
+        if (data === null) {
+            localStorage.setItem("users", JSON.stringify([values]))
+        } else {
+            data.push(values)
+            localStorage.setItem("users", JSON.stringify(data))
         }
 
-    } else if (usertype === 'singup') {
-        schema = yup.object().shape(Signup)
-        initval = {
+    }
+
+    const handleSignup = (values) => {
+        let data = JSON.parse(localStorage.getItem("users"))
+
+        if (data === null) {
+            localStorage.setItem("users", JSON.stringify([values]))
+        } else {
+            data.push(values)
+            localStorage.setItem("users", JSON.stringify(data))
+        }
+    }
+    const handlepassword = (values) => {
+        // alert(JSON.stringify(values.email));
+        let data = JSON.parse(localStorage.getItem("users"))
+
+        if (data === null) {
+            localStorage.setItem("users", JSON.stringify([values]))
+        } else {
+            data.push(values)
+            localStorage.setItem("users", JSON.stringify(data))
+        }
+    }
+
+    let login_set = {
+        email: yup.string().required('enter email').email('enter valid email'),
+        password: yup.string().required('please enter password'),
+    }
+
+    let signup_set = {
+        name: yup.string().required('please enter name'),
+        email: yup.string().required('enter email').email('enter valid email'),
+        password: yup.string().required('please enter password'),
+    }
+    let password_set = {
+        email: yup.string().required('enter email').email('enter valid email')
+    }
+
+
+    let schema, initVal;
+
+    console.log(reset);
+    if (userType === "Login" && !reset) {
+        schema = yup.object().shape(login_set);
+        initVal = {
+            email: '',
+            password: ''
+        }
+    } else if (userType === "Signup" && !reset) {
+        schema = yup.object().shape(signup_set);
+        initVal = {
             name: '',
             email: '',
             password: ''
         }
-
-    } else if (usertype === 'Login') {
-        schema = yup.object().shape(password)
-        initval = {
-            email: '',
+    } else if (reset) {
+        console.log(reset);
+        schema = yup.object().shape(password_set);
+        initVal = {
+            email: ''
         }
     }
+
     const formik = useFormik({
-        initialValues: initval,
+        initialValues: initVal,
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            if (usertype === 'Login') {
-                handleLogin(values)
-            } else if (usertype === 'Signup') {
+            if (userType === "Login" && !reset) {
+                handletLogin(values)
+            } else if (userType === "Signup" && !reset) {
                 handleSignup(values)
+            } else if (reset) {
+                handlepassword(values)
             }
             resetForm();
-        },
+        }
     })
-    console.log(formik.errors.email);
+
+
+    console.log(formik.errors);
+
     return (
-        <section id="appointment" className="appointment">
+        <section id="appointment" className="appointment d-flex">
             <div className="container">
-
-                {
-                    password ?
-                        <div className="section-title">
-                            <h2 className='centeerr'>Forget password</h2>
-                        </div>
-                        : usertype === 'Login' ?
-                            <div classname="section-title">
-                                <h2 className="centeerr">Login</h2>
-                            </div>
-                            :
-                            <div classname="section-title">
-                                <h2 className="centeerr">Signup</h2>
-                            </div>
-
-                }
-                <div action method="post" className="php-email-form">
+                <div className='section-title'>
+                    {
+                        reset ?
+                            <h2 className='centerr'>Reset Password</h2> :
+                            userType === 'Login' ? <h2 className='centerr'>Login</h2> : <h2 className='centerr'>Signup</h2>
+                    }
+                </div>
+                <div className='php-email-form'>
                     <Formik value={formik}>
                         <Form onSubmit={formik.handleSubmit}>
-                            <div className="row">
-
+                            <div className='row align-items-center justify-content-center'>
                                 {
-
-                                    usertype === 'Login' ?
-                                        null
+                                    userType === 'Login' ? null
                                         :
-                                        <div className="col-md-7 form-group mt-3 mt-md-0">
+                                        <div className="col-md-7 form-group">
                                             <input
-                                                type="name"
-                                                className="form-control"
+                                                type="text"
                                                 name="name"
+                                                className="form-control"
                                                 id="name"
                                                 placeholder="Your Name"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.name}
-                                                onBlur={formik.handleBlur} />
+                                                onBlur={formik.handleBlur}
+
+                                            />
+
                                             {
-                                                formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : null
+                                                formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
                                             }
+
                                             <div className="validate" />
-
                                         </div>
-
                                 }
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input
-                                        type="email"
+                                        type="text"
                                         className="form-control"
-                                        placeholder='your email'
                                         name="email"
                                         id="email"
+                                        placeholder="Your Email"
                                         onChange={formik.handleChange}
                                         value={formik.values.email}
                                         onBlur={formik.handleBlur}
                                     />
                                     {
-                                        formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : null
+                                        formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
                                     }
+
                                     <div className="validate" />
                                 </div>
-
                                 {
-                                    password === true ?
+                                    reset === true ?
                                         null :
-
                                         <div className="col-md-7 form-group mt-3 mt-md-0">
                                             <input
                                                 type="password"
                                                 className="form-control"
                                                 name="password"
-                                                id="phone"
-                                                placeholder="password"
+                                                id="password"
+                                                placeholder="Your Password"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.password}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {
-                                                formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null
+                                                formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : ''
                                             }
+
                                             <div className="validate" />
-
-
                                         </div>
                                 }
                                 {
-                                    password ?
+                                    reset ?
                                         <div className="text-center">
-                                            <button type="submit" className="mt-4" onClick={() => passwordchng()}>Forget password</button><br></br>
+                                            <button type="submit">Forgot password</button><br></br>
                                         </div>
                                         :
-                                        usertype === 'Login' ?
+                                        userType === 'Login' ?
                                             <div className="text-center">
-                                                <button type='submit' onClick={() => handleLogin()}>Login</button><br></br>
+                                                <button type="submit">Login</button><br></br>
                                             </div> :
                                             <div className="text-center">
-                                                <button type='submit' onClick={() => handleSignup()} >signup</button>
+                                                <button type="submit">signup</button>
                                             </div>
                                 }
                                 {
-
-                                    password === true ?
+                                    reset === true ?
                                         <div className='text-center mt-5'>
                                             <span>already have an account ?</span>
-                                            <a onClick={() => setpassword('Login')}>Login</a>
+                                            <a onClick={() => setReset(false)}>Login</a>
                                         </div> :
-                                        usertype === 'Login' ?
+                                        userType === 'Login' ?
                                             <div className='text-center mt-5'>
-                                                <span>create a New account</span>
-                                                <button>
-                                                    <a onClick={() => { setuserType('Signup') }} >signup</a> </button><br></br>
-                                                <a className="mt-4" onClick={() => { setpassword(true) }}>Forget password</a>
+                                                <span>create a New account ?</span>
+                                                <a onClick={() => { setUserType('Signup') }} >Signup</a> <br></br>
+                                                <a className='mt-3' onClick={() => { setReset(true) }}>Forget password</a>
                                             </div> :
                                             <div className='text-center mt-5'>
                                                 <span>already have an account ?</span>
-                                                <a onClick={() => { setuserType('Login') }} >Login</a>
+                                                <a onClick={() => { setUserType('Login') }} >    Login</a>
                                             </div>
                                 }
                             </div>
                         </Form>
                     </Formik>
+                    <div>
+                    </div>
                 </div>
             </div>
-        </section>
+
+
+        </section >
     );
 }
+
+
+
+
 
 export default Auth;
