@@ -1,6 +1,7 @@
 import React from 'react';
-
+import MiniDrawer from '../Drawer/Drawer';
 function Doctor(props) {
+<MiniDrawer />
     return (
         <section id="doctors" className="doctors">
             <div className="container">
