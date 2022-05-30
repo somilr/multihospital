@@ -9,11 +9,13 @@ import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
 import Medicine from "./container/Medicine/Medicine";
+import MiniDrawer from "./container/Drawer/Drawer";
 
 function App() {
   return (
     <>
       <Header />
+    <MiniDrawer />
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/Departments"} component={Departments} />

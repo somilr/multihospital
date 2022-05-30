@@ -1,5 +1,4 @@
 import React from 'react';
-
 import List from '../../componet/List/List';
 
 const medicine = [
