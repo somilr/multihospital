@@ -10,6 +10,8 @@ import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
 import Medicine from "./container/Medicine/Medicine";
 import MiniDrawer from "./container/Drawer/Drawer";
+import PublicRoute from "./Route/PublicRoute";
+import PrivateRoute from "./Route/PrivateRoute";
 
 function App() {
   return (
@@ -17,14 +19,14 @@ function App() {
       <Header />
     <MiniDrawer />
       <Switch>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/Departments"} component={Departments} />
-        <Route exact path={"/doctor"} component={Doctor} />
-        <Route exact path={"/About"} component={About} />
-        <Route exact path={"/Medicine"} component={Medicine} />
-        <Route exact path={"/Contact"} component={Contact} />
-        <Route exact path={"/Appoinment"} component={Appoinment }/>
-        <Route exact path={"/Auth"} component={Auth} />
+        <PublicRoute exact path={"/"} component={Home} />
+        <PublicRoute exact path={"/Departments"} component={Departments} />
+        <PublicRoute exact path={"/doctor"} component={Doctor} />
+        <PublicRoute exact path={"/About"} component={About} />
+        <PrivateRoute exact path={"/Medicine"} component={Medicine} />
+        <PublicRoute exact path={"/Contact"} component={Contact} />
+        <PublicRoute exact path={"/Appoinment"} component={Appoinment }/>
+        <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />
     </>
