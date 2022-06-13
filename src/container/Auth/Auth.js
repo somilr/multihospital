@@ -10,7 +10,7 @@ function Auth(props) {
     const handletLogin = (values) => {
         // alert(JSON.stringify(values, null, 2));
         let data = JSON.parse(localStorage.getItem("users"))
-        sessionStorage.setItem("user","123456")
+        sessionStorage.setItem("user","")
 
         if (data === null) {
             localStorage.setItem("users", JSON.stringify([values]))

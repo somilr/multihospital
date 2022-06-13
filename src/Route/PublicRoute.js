@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { isLogin } from '.';
+import { isLogin } from '../utils/index';
 
 function PublicRoute({component: Component , restricated=false , ...khushal}) {
     return (
