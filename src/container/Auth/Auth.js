@@ -7,7 +7,8 @@ function Auth(props) {
     const [usertype, setuserType] = useState('Login');
     const [password, setpassword] = useState(false)
     const handleLogin = (values) => {
-        alert(JSON.stringify(values, null, 2));
+        // alert(JSON.stringify(values, null, 2));
+        sessionStorage.setItem("user" , "213213654")
     }
     const handleSignup = (values) => {
 

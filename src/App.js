@@ -9,20 +9,22 @@ import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
 import Medicine from "./container/Medicine/Medicine";
+import PrivateRoute from "./Route/PrivateRoute";
+import PublicRoute from "./Route/PublicRoute";
 
 function App() {
   return (
     <>
       <Header />
       <Switch>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/Departments"} component={Departments} />
-        <Route exact path={"/doctor"} component={Doctor} />
-        <Route exact path={"/About"} component={About} />
-        <Route exact path={"/Medicine"} component={Medicine} />
-        <Route exact path={"/Contact"} component={Contact} />
-        <Route exact path={"/Appoinment"} component={Appoinment }/>
-        <Route exact path={"/Auth"} component={Auth} />
+        <PublicRoute exact path={"/"} component={Home} />
+        <PublicRoute exact path={"/Departments"} component={Departments} />
+        <PublicRoute exact path={"/doctor"} component={Doctor} />
+        <PublicRoute exact path={"/About"} component={About} />
+        <PrivateRoute exact path={"/Medicine"} component={Medicine} />
+        <PublicRoute exact path={"/Contact"} component={Contact} />
+        <PrivateRoute exact path={"/Appoinment"} component={Appoinment }/>
+        <PublicRoute restricted={true} exact path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />
     </>
