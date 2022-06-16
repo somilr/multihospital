@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import * as yup from 'yup';
-import { Form, Formik, useFormik } from 'formik';
+
+
 
 function Auth(props) {
 
