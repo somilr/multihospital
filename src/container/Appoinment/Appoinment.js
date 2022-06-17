@@ -38,7 +38,8 @@ function Appoinment(props) {
            handleSignup(values)
           },
         });
-
+        const {handleChange , error,handleSubmit} = formik;
+        
         console.log(formik.errors.name); 
     return (
         <section id="appointment" className="appointment">
@@ -50,7 +51,7 @@ function Appoinment(props) {
                         Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                 </div>
               <Formik  value={formik}>
-              <Form onSubmit={formik.handleSubmit} className="php-email-form">
+              <Form onSubmit={handleSubmit} className="php-email-form">
                     <div className="row">
                         <div className="col-md-4 form-group">
                             <input 
@@ -58,7 +59,9 @@ function Appoinment(props) {
                             name="name" 
                             className="form-control"
                              id="name" placeholder="Your Name"
-                             onChange={formik.handleChange}/>
+                            error={Boolean(error.name)}
+                            errormsg={error.name}
+                             onChange={handleChange}/>
                         {
                           formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
                         }
@@ -71,7 +74,7 @@ function Appoinment(props) {
                              name="email" 
                             id="email" 
                             placeholder="Your Email"
-                            onChange={formik.handleChange} />
+                            onChange={handleChange} />
                 {
                           formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
                 }                            
