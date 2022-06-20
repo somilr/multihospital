@@ -1,20 +1,13 @@
-import React, {  } from 'react';
-import  InputBoxStyle from "../InputBox/inputboxstyle"
-import  FormFeedBackStyled from "../InputBox/FormFeedBackStyled"
+import React from "react";
+import { InputBoxStyle, FormFeedBackStyled } from "./inputbox.style";
 
-function InputBox({Children, errorr=false,...rest}) {
-    return (
-    
+function InputBox({ Children, errormsg = "", error = false, ...rest }) {
+  return (
     <>
-
-      <InputBoxStyle {... rest}>
-      {Children}
-       </InputBoxStyle>
-       <FormFeedBackStyled>
-
-       </FormFeedBackStyled>
+      <InputBoxStyle {...rest}>{Children}</InputBoxStyle>
+      <FormFeedBackStyled error={error}>{errormsg}</FormFeedBackStyled>
     </>
-    );
+  );
 }
 
 export default InputBox;
