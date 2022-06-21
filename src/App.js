@@ -12,6 +12,7 @@ import Medicine from "./container/Medicine/Medicine";
 import PublicRoute from "./Route/PublicRoute";
 import PrivateRoute from "./Route/PrivateRoute";
 import Appointment from "./container/Appoinment/Appoinment";
+import ListAppintment from "./container/Appoinment/ListAppintment";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <PrivateRoute exact path={"/Medicine"} component={Medicine} />
         <PublicRoute exact path={"/Contact"} component={Contact} />
         <PublicRoute exact path={"/Appointment"} component={Appointment}/>
+        <PublicRoute exact path={"/ListAppintment"} component={ListAppintment}/>
         <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />

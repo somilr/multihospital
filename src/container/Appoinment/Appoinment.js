@@ -5,16 +5,8 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import InputBox from "../../componet/InputBox/InputBox";
 
-function Appointment(props) {
+function BookAppointment(props) {
   const history = useHistory();
-
-  let schema = yup.object().shape({
-    name: yup.string().required("please enter name"),
-    email: yup.string().required("enter email").email("enter valid email"),
-    phone: yup.number().min(10).required("please enter number"),
-    date: yup.date().required("please enter date"),
-    message: yup.string().required("please enter message"),
-  });
 
   const handleSubmit = (values) => {
     const data = JSON.parse(localStorage.getItem("users"));
@@ -28,12 +20,17 @@ function Appointment(props) {
       localStorage.setItem("users", JSON.stringify(data));
     }
 
-    history.push("/listappointment");
+    history.push("/ListAppintment");
   };
 
-  // const handleClick = () => {
-
-  // }
+  let schema = yup.object().shape({
+    name: yup.string().required("please enter name"),
+    email: yup.string().required("enter email").email("enter valid email"),
+    phone: yup.number().min(10).required("please enter number"),
+    date: yup.date().required("please enter date"),
+    department: yup.date().required("please select department"),
+    message: yup.string().required("please enter message"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -41,18 +38,19 @@ function Appointment(props) {
       email: "",
       phone: "",
       date: "",
+      department: "",
       message: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
       handleSubmit(values);
+
       // alert(JSON.stringify(values, null, 2));
     },
   });
 
-  const { handleChange, error, handleBlur, touched } = formik;
+  const { errors, handleChange, touched, handleBlur } = formik;
 
-  // console.log(formik.errors);
   return (
     <section id="appointment" className="appointment">
       <div className="container">
@@ -68,35 +66,27 @@ function Appointment(props) {
         </div>
         <div className="row text-center">
           <div className="col-6">
-            <NavLink to={"/bookappointment"}>Bookappoinment</NavLink>
+            <NavLink to={"/Appointment"}>Book Appoinment</NavLink>
           </div>
           <div className="col-6">
-            <NavLink to={"/listappointment"}>Listappoinment</NavLink>
+            <NavLink to={"/ListAppintment"}>List Appoinment</NavLink>
           </div>
         </div>
-        <Formik value={formik}>
-          <Form
-            onSubmit={formik.handleSubmit}
-            action
-            method="post"
-            role="form"
-            className="php-email-form"
-          >
+        <Formik values={formik}>
+          <Form onSubmit={formik.handleSubmit} className="php-email-form">
             <div className="row">
               <div className="col-md-4 form-group">
-                <input
-                  type="text"
+                <InputBox
+                  type="name"
                   name="name"
                   className="form-control"
                   id="name"
                   placeholder="Your Name"
+                  errors={Boolean(errors.name && touched.name)}
+                  errorMessages={errors.name}
                   onChange={handleChange}
-                  error={error?.name && touched?.name}
                   onBlur={handleBlur}
-                  errormsg={error?.name}
                 />
-
-                <div className="validate" />
               </div>
               <div className="col-md-4 form-group mt-3 mt-md-0">
                 <InputBox
@@ -105,13 +95,11 @@ function Appointment(props) {
                   name="email"
                   id="email"
                   placeholder="Your Email"
-                  onChange={formik.handleChange}
+                  errors={Boolean(errors.email && touched.email)}
+                  errorMessages={errors.email}
+                  onChange={handleChange}
                   onBlur={handleBlur}
-                  error={error?.email && touched?.email}
-                  errormsg={error?.email}
                 />
-
-                <div className="validate" />
               </div>
               <div className="col-md-4 form-group mt-3 mt-md-0">
                 <InputBox
@@ -120,13 +108,11 @@ function Appointment(props) {
                   name="phone"
                   id="phone"
                   placeholder="Your Phone"
-                  onChange={formik.handleChange}
+                  errors={Boolean(errors.phone && touched.phone)}
+                  errorMessages={errors.phone}
+                  onChange={handleChange}
                   onBlur={handleBlur}
-                  error={error?.phone && touched?.phone}
-                  errormsg={error?.Phone}
                 />
-
-                <div className="validate" />
               </div>
             </div>
             <div className="row">
@@ -134,50 +120,48 @@ function Appointment(props) {
                 <InputBox
                   type="date"
                   name="date"
-                  className="form-control datepicker"
+                  className="form-control datapicker"
                   id="date"
                   placeholder="Appointment Date"
-                  onChange={formik.handleChange}
-                  value={formik.values.date}
+                  errors={Boolean(errors.date && touched.date)}
+                  errorMessages={errors.date}
+                  onChange={handleChange}
                   onBlur={handleBlur}
-                  error={error?.date && touched?.date}
-                  errormsg={error?.date}
                 />
-
-                <div className="validate" />
               </div>
               <div className="col-md-4 form-group mt-3">
-                <select
+                <InputBox
+                  type="select"
                   name="department"
                   id="department"
                   className="form-select"
+                  onChange={handleChange}
                   onBlur={handleBlur}
-                  errormsg={error?.department}
-                  error={error?.department && touched?.department}
+                  errors={Boolean(errors.department && touched.department)}
+                  errorMessages={errors.department}
                 >
-                  <option value>Select Department</option>
+                  <option disabled selected>
+                    Select Department
+                  </option>
                   <option value="Department 1">Department 1</option>
                   <option value="Department 2">Department 2</option>
                   <option value="Department 3">Department 3</option>
-                </select>
-                <div className="validate" />
+                </InputBox>
               </div>
             </div>
             <div className="form-group mt-3">
-              <textarea
+              <InputBox
+                type="textarea"
                 className="form-control"
                 name="message"
                 rows={5}
                 placeholder="Message (Optional)"
                 defaultValue={""}
-                onChange={formik.handleChange}
-                value={formik.values.message}
-                onBlur={formik.handleBlur}
-                errormsg={error?.message}
-                error={error?.message && touched?.message}
+                errors={Boolean(errors.message && touched.message)}
+                errorMessages={errors.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
-
-              <div className="validate" />
             </div>
             <div className="mb-3">
               <div className="loading">Loading</div>
@@ -187,7 +171,7 @@ function Appointment(props) {
               </div>
             </div>
             <div className="text-center">
-              <button type="submit">Make an Appointment</button>
+              <button type="submit">Submit</button>
             </div>
           </Form>
         </Formik>
@@ -196,4 +180,4 @@ function Appointment(props) {
   );
 }
 
-export default Appointment;
+export default BookAppointment;
