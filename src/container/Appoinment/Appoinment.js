@@ -3,7 +3,8 @@ import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import InputBox from "../../componet/InputBox/InputBox";
+import InputBox from "../../componet/InputBox/InputBox"
+// import InputBox from "../../componet/InputBox/InputBox";
 
 function BookAppointment(props) {
   const history = useHistory();
