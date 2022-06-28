@@ -8,17 +8,17 @@ import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
 import Medicine from "./container/Medicine/Medicine";
-
 import PublicRoute from "./Route/PublicRoute";
 import PrivateRoute from "./Route/PrivateRoute";
 import Appointment from "./container/Appoinment/Appoinment";
 import ListAppintment from "./container/Appoinment/ListAppintment";
+import ContactList from "./container/Contact/ContactList";
 
 function App() {
   return (
     <>
       <Header />
-  
+
       <Switch>
         <PublicRoute exact path={"/"} component={Home} />
         <PublicRoute exact path={"/Departments"} component={Departments} />
@@ -26,8 +26,9 @@ function App() {
         <PublicRoute exact path={"/About"} component={About} />
         <PrivateRoute exact path={"/Medicine"} component={Medicine} />
         <PublicRoute exact path={"/Contact"} component={Contact} />
-        <PublicRoute exact path={"/Appointment"} component={Appointment}/>
-        <PublicRoute exact path={"/ListAppintment"} component={ListAppintment}/>
+        <PublicRoute exact path={"/ContactList"} component={ContactList} />
+        <PublicRoute exact path={"/Appointment"} component={Appointment} />
+        <PublicRoute exact  path={"/ListAppintment"}  component={ListAppintment}/>
         <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
       </Switch>
       <Footer />
