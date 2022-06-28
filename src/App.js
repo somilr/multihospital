@@ -7,11 +7,13 @@ import Doctor from "./container/Doctor/Doctor";
 import Contact from "./container/Contact/Contact";
 import Footer from "./componet/Footer";
 import Auth from "./container/Auth/Auth";
+// import Contactlist from "./container/Contactlist";
 import Medicine from "./container/Medicine/Medicine";
 
 import PublicRoute from "./Route/PublicRoute";
 import PrivateRoute from "./Route/PrivateRoute";
 import Appointment from "./container/Appoinment/Appoinment";
+import Contactlist from "./container/Contact/Contactlist";
 
 function App() {
   return (
@@ -25,8 +27,10 @@ function App() {
         <PublicRoute exact path={"/About"} component={About} />
         <PrivateRoute exact path={"/Medicine"} component={Medicine} />
         <PublicRoute exact path={"/Contact"} component={Contact} />
+        <PublicRoute exact path={"/Contactlist"} component={Contactlist} />
         <PublicRoute exact path={"/Appointment"} component={Appointment}/>
         <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
+        {/* <PublicRoute exact path={"/Contactlist"} component={"/Contactlist"} /> */}
       </Switch>
       <Footer />
     </>

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { NavLink, useHistory } from 'react-router-dom';
+
 function Contact(props) {
+ const history = useHistory();
+
 
     const handleSignup = (values) => {
+       
         let data = JSON.parse(localStorage.getItem("users"))
 
         if (data === null) {
@@ -12,6 +17,7 @@ function Contact(props) {
             data.push(values)
             localStorage.setItem("users", JSON.stringify(data))
         }
+        history.push("/Contactlist")
     }
 
     let schema = yup.object().shape({
@@ -31,8 +37,12 @@ function Contact(props) {
         onSubmit: values => {
             handleSignup(values)
           },
+
+        // history.push("/Contact");
+
         });
-        console.log(formik.errors.name); 
+        // console.log(formik.errors.name); 
+
     return (
         <section id="contact" className="contact">
             <div className="container">
@@ -41,6 +51,14 @@ function Contact(props) {
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                         blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
                         luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
+                </div>
+                <div className="row text-center">
+                    <div className="col-6">
+                        <NavLink to={"/Contact"}>Contact</NavLink>
+                    </div>
+                    <div className="col-6">
+                        <NavLink  to={"/Contactlist"}>Contactlist</NavLink>
+                    </div>
                 </div>
             </div>
             <div className="container">
@@ -78,7 +96,7 @@ function Contact(props) {
                                     onChange={formik.handleChange} />
                       {
                           formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
-                    }                
+                      }                
                                 </div>
                                 <div className="col-md-6 form-group mt-3 mt-md-0">
                                     <input
