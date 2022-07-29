@@ -2,10 +2,14 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signupuser } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [userType, setUserType] = useState('Login')
     const [reset, setReset] = useState(false)
+    
+    const dispatch = useDispatch();
 
     const handletLogin = (values) => {
         // alert(JSON.stringify(values, null, 2));
@@ -22,14 +26,16 @@ function Auth(props) {
     }
 
     const handleSignup = (values) => {
-        let data = JSON.parse(localStorage.getItem("users"))
+        // let data = JSON.parse(localStorage.getItem("users"))
 
-        if (data === null) {
-            localStorage.setItem("users", JSON.stringify([values]))
-        } else {
-            data.push(values)
-            localStorage.setItem("users", JSON.stringify(data))
-        }
+        // if (data === null) {
+        //     localStorage.setItem("users", JSON.stringify([values]))
+        // } else {
+        //     data.push(values)
+        //     localStorage.setItem("users", JSON.stringify(data))
+        // }
+
+        dispatch(signupuser(values))
     }
     const handlepassword = (values) => {
         // alert(JSON.stringify(values.email));
@@ -203,7 +209,7 @@ function Auth(props) {
                                             </div> :
                                             <div className='text-center mt-5'>
                                                 <span>already have an account ?</span>
-                                                <a onClick={() => { setUserType('Login') }} >    Login</a>
+                                                <a onClick={() => { setUserType('Login') }} >Login</a>
                                             </div>
                                 }
                             </div>
