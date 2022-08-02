@@ -26,6 +26,7 @@ function Auth(props) {
     }
 
     const handleSignup = (values) => {
+        // console.log(values);
         // let data = JSON.parse(localStorage.getItem("users"))
 
         // if (data === null) {
@@ -66,7 +67,7 @@ function Auth(props) {
 
     let schema, initVal;
 
-    console.log(reset);
+    // console.log(reset);
     if (userType === "Login" && !reset) {
         schema = yup.object().shape(login_set);
         initVal = {
@@ -104,7 +105,7 @@ function Auth(props) {
     })
 
 
-    console.log(formik.errors);
+    // console.log(formik.errors);
 
     return (
         <section id="appointment" className="appointment d-flex">
