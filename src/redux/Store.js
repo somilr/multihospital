@@ -10,11 +10,12 @@ const sagaMiddleware = createSagaMiddleware()
 
 const middlewares = [sagaMiddleware, thunk]
  
-export const configureStore = () => {
+const configureStore = () => {
     let store = createStore(rootReducer, applyMiddleware(...middlewares))
  
-
     sagaMiddleware.run(rootSaga)
 
     return  store 
 }
+
+export const store = configureStore()

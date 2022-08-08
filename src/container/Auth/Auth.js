@@ -23,9 +23,12 @@ function Auth(props) {
             localStorage.setItem("users", JSON.stringify(data))
         }
 
+        // dispatch(signinuser)
+
     }
 
     const handleSignup = (values) => {
+        console.log(values);
         // console.log(values);
         // let data = JSON.parse(localStorage.getItem("users"))
 

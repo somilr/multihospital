@@ -1,3 +1,4 @@
+import { Euro } from "@mui/icons-material";
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -23,20 +24,26 @@ export const signupAPI = (data) => {
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         if (user.emailVerified) {
-                            console.log("Email secessfull");
+                            resolve({ payload: "Email secessfull" });
                         } else {
-                            console.log("Plese verify your email");
+                            resolve({ payload: "Plese verify your email" });
                         }
                     } else {
-                        console.log("wrong verify");
+                        reject({ payload: "wrong verify" });
                     }
                 })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode);
-                // ..
+
+
+                if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
+                    reject({ payload: "already RagistarEmail" });
+                } else {
+                    reject({ payload: errorCode });
+                }
             });
     })
 }
+

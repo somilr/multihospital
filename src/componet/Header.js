@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Alert from '../Alert';
 
 function header(props) {
     return (
@@ -61,6 +62,7 @@ function header(props) {
                         </NavLink> 
                         }
                     </div>
+                    <Alert/>
                 </header>
             </div>
 

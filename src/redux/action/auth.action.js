@@ -4,6 +4,10 @@ export const signupuser = (values) => (dispech) => {
     dispech({type:ActionTypes.SIGNUP_USER, payload: values});
 }
 
+// export const signinuser = (values) => (dispech) => {
+//     dispech({type:ActionTypes.SIGNIN_USER, payload: values});
+// }
+
 export const emailverification = (user) => (dispech) => {
     dispech({type:ActionTypes.EMAIL_VERIFICATION, payload:user})
 }

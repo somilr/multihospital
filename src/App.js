@@ -16,29 +16,31 @@ import Appointment from "./container/Appoinment/Appoinment";
 import Contactlist from "./container/Contact/Contactlist";
 import { Provider } from "react-redux";
 import { configure } from "@testing-library/react";
-import { configureStore } from "./redux/Store";
+import { store } from "./redux/Store";
+import { SnackbarProvider } from 'notistack';
 
 function App() {
-  const store = configureStore();
+  // const store = configureStore();
   return (
     <>
-      <Provider store={store}>
-        <Header />
-
-        <Switch>
-          <PublicRoute exact path={"/"} component={Home} />
-          <PublicRoute exact path={"/Departments"} component={Departments} />
-          <PublicRoute exact path={"/doctor"} component={Doctor} />
-          <PublicRoute exact path={"/About"} component={About} />
-          <PrivateRoute exact path={"/Medicine"} component={Medicine} />
-          <PublicRoute exact path={"/Contact"} component={Contact} />
-          <PublicRoute exact path={"/Contactlist"} component={Contactlist} />
-          <PublicRoute exact path={"/Appointment"} component={Appointment} />
-          <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
-          {/* <PublicRoute exact path={"/Contactlist"} component={"/Contactlist"} /> */}
-        </Switch>
-        <Footer />
-      </Provider>
+      <SnackbarProvider maxSnack={3}>
+        <Provider store={store}>
+          <Header />
+          <Switch>
+            <PublicRoute exact path={"/"} component={Home} />
+            <PublicRoute exact path={"/Departments"} component={Departments} />
+            <PublicRoute exact path={"/doctor"} component={Doctor} />
+            <PublicRoute exact path={"/About"} component={About} />
+            <PrivateRoute exact path={"/Medicine"} component={Medicine} />
+            <PublicRoute exact path={"/Contact"} component={Contact} />
+            <PublicRoute exact path={"/Contactlist"} component={Contactlist} />
+            <PublicRoute exact path={"/Appointment"} component={Appointment} />
+            <PublicRoute restricated={true} exact path={"/Auth"} component={Auth} />
+            {/* <PublicRoute exact path={"/Contactlist"} component={"/Contactlist"} /> */}
+          </Switch>
+          <Footer />
+        </Provider>
+      </SnackbarProvider>
     </>
   );
 }
