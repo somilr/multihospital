@@ -1,8 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Alert from '../Alert';
+import {useSelector} from 'react-redux';
 
-function header(props) {
+function Header(props) {
+
+    let auth = useSelect3or(state=>state.auth)
+    console.log(auth);
+
     return (
         <div>
             <div className="main-header">
@@ -71,4 +76,4 @@ function header(props) {
     );
 }
 
-export default header;
+export default Header;

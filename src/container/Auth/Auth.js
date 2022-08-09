@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { signupuser } from '../../redux/action/auth.action';
+import { signinuser, signupuser } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [userType, setUserType] = useState('Login')
@@ -13,17 +13,17 @@ function Auth(props) {
 
     const handletLogin = (values) => {
         // alert(JSON.stringify(values, null, 2));
-        let data = JSON.parse(localStorage.getItem("users"))
-        sessionStorage.setItem("user","123456")
+        // let data = JSON.parse(localStorage.getItem("users"))
+        // sessionStorage.setItem("user","123456")
 
-        if (data === null) {
-            localStorage.setItem("users", JSON.stringify([values]))
-        } else {
-            data.push(values)
-            localStorage.setItem("users", JSON.stringify(data))
-        }
+        // if (data === null) {
+        //     localStorage.setItem("users", JSON.stringify([values]))
+        // } else {
+        //     data.push(values)
+        //     localStorage.setItem("users", JSON.stringify(data))
+        // }
 
-        // dispatch(signinuser)
+        dispatch(signinuser(values));
 
     }
 
@@ -59,7 +59,7 @@ function Auth(props) {
     }
 
     let signup_set = {
-        name: yup.string().required('please enter name'),
+        // name: yup.string().required('please enter name'),
         email: yup.string().required('enter email').email('enter valid email'),
         password: yup.string().required('please enter password'),
     }
@@ -80,7 +80,7 @@ function Auth(props) {
     } else if (userType === "Signup" && !reset) {
         schema = yup.object().shape(signup_set);
         initVal = {
-            name: '',
+            // name: '',
             email: '',
             password: ''
         }
@@ -127,25 +127,26 @@ function Auth(props) {
                                 {
                                     userType === 'Login' ? null
                                         :
-                                        <div className="col-md-7 form-group">
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                className="form-control"
-                                                id="name"
-                                                placeholder="Your Name"
-                                                onChange={formik.handleChange}
-                                                value={formik.values.name}
-                                                onBlur={formik.handleBlur}
+                                        // <div className="col-md-7 form-group">
+                                        //     <input
+                                        //         type="text"
+                                        //         name="name"
+                                        //         className="form-control"
+                                        //         id="name"
+                                        //         placeholder="Your Name"
+                                        //         onChange={formik.handleChange}
+                                        //         value={formik.values.name}
+                                        //         onBlur={formik.handleBlur}
 
-                                            />
+                                        //     />
 
-                                            {
-                                                formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
-                                            }
+                                        //     {
+                                        //         formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
+                                        //     }
 
-                                            <div className="validate" />
-                                        </div>
+                                        //     <div className="validate" />
+                                        // </div>
+                                        <></>
                                 }
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input

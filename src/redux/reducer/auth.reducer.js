@@ -8,7 +8,7 @@ const initalState = {
 
 export const signupReducer = (state = initalState, action) => {
     switch (action.type) {
-        case ActionTypes.SIGNUP_USER:
+        case ActionTypes.LOGGIN_USER:
             return {
                 ...state,
                 isLoading: false,
