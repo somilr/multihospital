@@ -1,11 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Alert from '../Alert';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Header(props) {
-
-    let auth = useSelect3or(state=>state.auth)
+    let auth = useSelector(state => state.auth)
     console.log(auth);
 
     return (
@@ -22,7 +21,7 @@ function Header(props) {
                             <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
                             <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                             <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
-             </div>
+                        </div>
                     </div>
                 </div>
                 <header id="header" className="fixed-top">
@@ -36,7 +35,7 @@ function Header(props) {
                         <nav id="navbar" className="navbar order-last order-lg-0">
                             <ul>
                                 <li>
-                                    <NavLink  to= {"/"} className="nav-link scrollto active">Home</NavLink>
+                                    <NavLink to={"/"} className="nav-link scrollto active">Home</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"/Departments"} className="nav-link scrollto">Department</NavLink>
@@ -47,12 +46,12 @@ function Header(props) {
                                 <li>
                                     <NavLink to={"/About"} className="nav-link scrollto">About</NavLink>
                                 </li>
-                                { <li>
+                                {<li>
                                     <NavLink to={"/Medicine"} className="nav-link scrollto">Medicine</NavLink>
-                                </li> }
+                                </li>}
                                 <li>
                                     <NavLink to={"/Contact"} className="nav-link scrollto">Contact</NavLink>
-                                </li> 
+                                </li>
                                 {/* <li>
                                     <NavLink to={"/Contactlist"} className="nav-link scrollto">Contactlist</NavLink>
                                 </li>  */}
@@ -61,17 +60,20 @@ function Header(props) {
                         </nav>
                         <NavLink to={"/Appointment"} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                             Appointment</NavLink>
-                          
-                        { <NavLink to={"/Auth"} className="appointment-btn scrollto">
-                            <span className="d-none d-md-inline">Login/ Signup</span>
-                        </NavLink> 
+
+                        {
+                            auth.user === null ?
+                                <NavLink to={"/Auth"} className="appointment-btn scrollto">
+                                    <span className="d-none d-md-inline">Login/ Signup</span>
+                                </NavLink>
+                                : <NavLink to={"/Auth"} className="appointment-btn scrollto">
+                                    <span className="d-none d-md-inline">Logout</span>
+                                </NavLink>
                         }
                     </div>
-                    <Alert/>
+                    <Alert />
                 </header>
             </div>
-
-
         </div>
     );
 }

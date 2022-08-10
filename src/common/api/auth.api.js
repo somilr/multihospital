@@ -26,7 +26,7 @@ export const signupAPI = (data) => {
                         if (user.emailVerified) {
                             resolve({ payload: "Email secessfull" });
                         } else {
-                            resolve({ payload: "Your Email Sucessfull" });
+                            resolve({ payload: "Your Email Verify" });
                         }
                     } else {
                         reject({ payload: "wrong verify" });

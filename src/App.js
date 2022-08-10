@@ -16,8 +16,9 @@ import Appointment from "./container/Appoinment/Appoinment";
 import Contactlist from "./container/Contact/Contactlist";
 import { Provider } from "react-redux";
 import { configure } from "@testing-library/react";
-import { store } from "./redux/Store";
+import { persistor, store } from "./redux/Store";
 import { SnackbarProvider } from 'notistack';
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   // const store = configureStore();
@@ -25,6 +26,7 @@ function App() {
     <>
       <SnackbarProvider maxSnack={3}>
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Header />
           <Switch>
             <PublicRoute exact path={"/"} component={Home} />
@@ -39,6 +41,7 @@ function App() {
             {/* <PublicRoute exact path={"/Contactlist"} component={"/Contactlist"} /> */}
           </Switch>
           <Footer />
+          </PersistGate>
         </Provider>
       </SnackbarProvider>
     </>
