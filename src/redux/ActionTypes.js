@@ -7,3 +7,6 @@ export const RESET_ALERT = "RESET_ALERT"
 
 export const SIGNIN_USER = "SIGNIN_USER"
 export const LOGGIN_USER = "LOGGIN_USER"
+
+export const LOGOUT_USER = "LOGOUT_USER"
+export const LOGGEDOUT_USER = "LOGGEDOUT_USER"

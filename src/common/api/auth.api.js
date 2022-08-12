@@ -1,5 +1,5 @@
 import { Euro } from "@mui/icons-material";
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 export const signupAPI = (data) => {
@@ -8,7 +8,7 @@ export const signupAPI = (data) => {
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
+                // console.log(user);
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
@@ -57,7 +57,7 @@ export const signinAPI = (data) => {
             }else {
                 reject({payload: "Your Email Sucessfull"})
             }     
-            console.log(user)
+            // console.log(user)
         })
         .catch((error)=>{
             if (error.code.localeCompare("auth/user-not-found") === 0) {
@@ -71,3 +71,14 @@ export const signinAPI = (data) => {
     })
 }
 
+export const logauAPI = () => {
+   return new Promise((resolve, reject) => {
+    signOut(auth)
+    .then((user) => {
+        resolve({payload: "Logout successfully"})
+    })
+    .catch((e) => {
+        reject({payload:  "Somthing Went Wrong"})
+    })
+   })
+}
