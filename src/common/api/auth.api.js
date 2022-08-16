@@ -1,5 +1,5 @@
 import { Euro } from "@mui/icons-material";
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 export const signupAPI = (data) => {
@@ -51,34 +51,61 @@ export const signinAPI = (data) => {
     console.log(data);
     return new Promise((resolve, reject) => {
         signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((user)=>{
-            if (user.user.emailVerified) {
-                resolve({payload: user.user});
-            }else {
-                reject({payload: "Your Email Sucessfull"})
-            }     
-            // console.log(user)
-        })
-        .catch((error)=>{
-            if (error.code.localeCompare("auth/user-not-found") === 0) {
-                reject({payload: "Please Your Email Register"})
-            } else if (error.code.localeCompare("auth/wrong-password") === 0) {
-                reject({payload: "Wrong email or password"})  
-            } else {
-                reject({payload: error})
-            }         
-        })
+            .then((user) => {
+                if (user.user.emailVerified) {
+                    resolve({ payload: user.user });
+                } else {
+                    reject({ payload: "Your Email Sucessfull" })
+                }
+                // console.log(user)
+            })
+            .catch((error) => {
+                if (error.code.localeCompare("auth/user-not-found") === 0) {
+                    reject({ payload: "Please Your Email Register" })
+                } else if (error.code.localeCompare("auth/wrong-password") === 0) {
+                    reject({ payload: "Wrong email or password" })
+                } else {
+                    reject({ payload: error })
+                }
+            })
+    })
+}
+
+export const googalelodinAPI = () => {
+    return new Promise((resolve, reject) => {
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                resolve({payload: user})
+
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                reject({payload:errorCode})
+            });
+
     })
 }
 
 export const logauAPI = () => {
-   return new Promise((resolve, reject) => {
-    signOut(auth)
-    .then((user) => {
-        resolve({payload: "Logout successfully"})
+    return new Promise((resolve, reject) => {
+        signOut(auth)
+            .then((user) => {
+                resolve({ payload: "Logout successfully" })
+            })
+            .catch((e) => {
+                reject({ payload: "Somthing Went Wrong" })
+            })
     })
-    .catch((e) => {
-        reject({payload:  "Somthing Went Wrong"})
-    })
-   })
 }

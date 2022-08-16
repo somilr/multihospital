@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { signinuser, signupuser } from '../../redux/action/auth.action';
+import { googlelogin, signinuser, signupuser } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [userType, setUserType] = useState('Login')
@@ -25,6 +25,10 @@ function Auth(props) {
 
         dispatch(signinuser(values));
 
+    }
+
+    const handleGoogalesignup = () => {
+        dispatch(googlelogin())
     }
 
     const handleSignup = (values) => {
@@ -217,6 +221,9 @@ function Auth(props) {
                                                 <a onClick={() => { setUserType('Login') }} >Login</a>
                                             </div>
                                 }
+                            </div>
+                            <div>
+                                <button onClick={() => {handleGoogalesignup() }}>Googale Signup</button>
                             </div>
                         </Form>
                     </Formik>

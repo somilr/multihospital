@@ -12,6 +12,10 @@ export const logginuser = (values) => (dispech) => {
     dispech({type:ActionTypes.LOGGIN_USER, payload: values});
 }
 
+export const googlelogin = () => (dispech) => {
+    dispech({type:ActionTypes.GOOGLE_LOGIN})
+}
+ 
 export const logoutuser = () => (dispech) => {
     dispech({type:ActionTypes.LOGOUT_USER})
 }
