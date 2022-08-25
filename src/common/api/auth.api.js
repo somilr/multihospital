@@ -1,5 +1,5 @@
 import { Euro } from "@mui/icons-material";
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 export const signupAPI = (data) => {
@@ -82,7 +82,7 @@ export const googalelodinAPI = () => {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                resolve({payload: user})
+                resolve({ payload: user })
 
             }).catch((error) => {
                 // Handle Errors here.
@@ -92,7 +92,7 @@ export const googalelodinAPI = () => {
                 const email = error.customData.email;
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
-                reject({payload:errorCode})
+                reject({ payload: errorCode })
             });
 
     })
@@ -106,6 +106,27 @@ export const logauAPI = () => {
             })
             .catch((e) => {
                 reject({ payload: "Somthing Went Wrong" })
+            })
+    })
+}
+
+export const forgotsAPI = (data) => {
+
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+            .then((user) => {
+                resolve({ payload: "Please check your email" })
+                // console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                // console.log(errorMessage);
+                if (error.code.localeCompare("auth/missing-email") === 0) {
+                    reject({ payload: "Please Your Email Register" })
+                }
+                reject({ payload: errorCode })
             })
     })
 }

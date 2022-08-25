@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { googlelogin, signinuser, signupuser } from '../../redux/action/auth.action';
+import { forgotpassword, googlelogin, signinuser, signupuser } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [userType, setUserType] = useState('Login')
@@ -47,14 +47,15 @@ function Auth(props) {
     }
     const handlepassword = (values) => {
         // alert(JSON.stringify(values.email));
-        let data = JSON.parse(localStorage.getItem("users"))
+        // let data = JSON.parse(localStorage.getItem("users"))
 
-        if (data === null) {
-            localStorage.setItem("users", JSON.stringify([values]))
-        } else {
-            data.push(values)
-            localStorage.setItem("users", JSON.stringify(data))
-        }
+        // if (data === null) {
+        //     localStorage.setItem("users", JSON.stringify([values]))
+        // } else {
+        //     data.push(values)
+        //     localStorage.setItem("users", JSON.stringify(data))
+        // }
+        dispatch(forgotpassword(values))
     }
 
     let login_set = {
@@ -193,7 +194,7 @@ function Auth(props) {
                                 {
                                     reset ?
                                         <div className="text-center">
-                                            <button type="submit">Forgot password</button><br></br>
+                                            <button type="submit" >Forgot password</button><br></br>
                                         </div>
                                         :
                                         userType === 'Login' ?

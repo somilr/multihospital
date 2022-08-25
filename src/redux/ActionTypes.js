@@ -12,3 +12,5 @@ export const LOGOUT_USER = "LOGOUT_USER"
 export const LOGGEDOUT_USER = "LOGGEDOUT_USER"
 
 export const GOOGLE_LOGIN = "GOOGLE_LOGIN"
+
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
